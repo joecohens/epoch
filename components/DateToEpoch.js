@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { DatePicker, Select, Row, Col } from 'antd';
+import { DatePicker, Row, Col } from 'antd';
 import moment from 'moment';
-const Option = Select.Option;
 
 export default class DateToEpoch extends Component {
   constructor(props) {
@@ -50,23 +49,14 @@ export default class DateToEpoch extends Component {
           onChange={this.onChangeDateTime}
           ref={node => (this.dateTimeInput = node)}
         />
-        {/* <Select
-          size="large"
-          defaultValue="lucy"
-          style={{ width: 192 }}
-          name="select"
-        >
-          <Option value="jack">jack</Option>
-          <Option value="lucy">lucy</Option>
-          <Option value="disabled" disabled>
-            disabled
-          </Option>
-          <Option value="yiminghe">yiminghe</Option>
-        </Select> */}
         <div className="margin-top-md text-center">
           <Row gutter={16}>
-            <Col span={12}>Seconds: {datetime ? datetime.format('X') : null}</Col>
-            <Col span={12}>Milliseconds: {datetime ? datetime.format('x') : null}</Col>
+            <Col span={12}>
+              Seconds: {datetime ? datetime.format('X') : null}
+            </Col>
+            <Col span={12}>
+              Milliseconds: {datetime ? datetime.format('x') : null}
+            </Col>
           </Row>
         </div>
       </div>

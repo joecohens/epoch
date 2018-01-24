@@ -10,10 +10,7 @@ export default class Current extends Component {
   }
 
   componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
+    this.timerID = setInterval(() => this.tick(), 1000);
   }
 
   componentWillUnmount() {
@@ -40,13 +37,22 @@ export default class Current extends Component {
       <div className="margin-bottom-md">
         <Row gutter={16}>
           <Col span={8}>
-            {this.renderHeader('Unix seconds', timestamp ? timestamp.format('X') : null)}
+            {this.renderHeader(
+              'Unix seconds',
+              timestamp ? timestamp.format('X') : null
+            )}
           </Col>
           <Col span={8}>
-            {this.renderHeader('Unix milliseconds', timestamp ? timestamp.format('x') : null)}
+            {this.renderHeader(
+              'Unix milliseconds',
+              timestamp ? timestamp.format('x') : null
+            )}
           </Col>
           <Col span={8}>
-            {this.renderHeader('Current time', timestamp ? timestamp.format('YYYY-MM-DD HH:mm:ss') : null)}
+            {this.renderHeader(
+              'Current time',
+              timestamp ? timestamp.format('YYYY-MM-DD HH:mm:ss') : null
+            )}
           </Col>
         </Row>
       </div>
