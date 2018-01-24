@@ -1,0 +1,141 @@
+// ant default vars
+// https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+
+@import '~antd/lib/style/index.less';
+@import '~antd/lib/auto-complete/style/index.less';
+@import '~antd/lib/avatar/style/index.less';
+@import '~antd/lib/date-picker/style/index.less';
+@import '~antd/lib/divider/style/index.less';
+@import '~antd/lib/dropdown/style/index.less';
+@import '~antd/lib/grid/style/index.less';
+@import '~antd/lib/input/style/index.less';
+@import '~antd/lib/input-number/style/index.less';
+@import '~antd/lib/list/style/index.less';
+@import '~antd/lib/locale-provider/style/index.less';
+@import '~antd/lib/select/style/index.less';
+
+@font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Ubuntu, sans-serif;
+
+html,
+body {
+  height: 100%;
+}
+body > div:first-of-type {
+  height: 100%;
+}
+body {
+  font-weight: 400;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  box-sizing: border-box;
+}
+
+#__next {
+  height: 100%;
+}
+
+#__next > div {
+  height: 100%;
+}
+
+#__next > div > div {
+  height: 100%;
+}
+
+h1 {
+  margin: 0;
+  line-height: 2.3em
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+
+.card {
+  width: 600px;
+  height: 530px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  flex-shrink: 0;
+  height: 48px;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-content {
+  padding: 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.well {
+  border-radius: 4px;
+  border: 1px solid rgb(218, 225, 233);
+}
+
+.padding-sm {
+  padding: 5px;
+}
+
+.padding-md {
+  padding: 10px;
+}
+
+.padding-lg {
+  padding: 15px;
+}
+
+.margin-sm {
+  margin: 5px;
+}
+
+.margin-md {
+  margin: 10px;
+}
+
+.margin-lg {
+  margin: 15px;
+}
+
+.margin-top-sm {
+  margin-top: 5px;
+}
+
+.margin-top-md {
+  margin-top: 10px;
+}
+
+.margin-top-lg {
+  margin-top: 15px;
+}
+
+.margin-bottom-sm {
+  margin-bottom: 5px;
+}
+
+.margin-bottom-md {
+  margin-bottom: 10px;
+}
+
+.margin-bottom-lg {
+  margin-bottom: 15px;
+}
+
+// @icon-url is handled in the webpack.${environment}.config and assets/styles/common/iconfonts.less files
