@@ -1,1 +1,8 @@
+# dependencies
+node_modules
+
+# build output
+.next
+
+# extras
 screenshot-v1.png
