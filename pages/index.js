@@ -1,35 +1,321 @@
+import React from 'react';
 import Head from 'next/head';
-import { LocaleProvider, Divider } from 'antd';
+import { ConfigProvider, Divider, Select, Button } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
-
-import stylesheet from '../styles/ant-theme-vars.less';
-import Current from '../components/Current';
-import Epoch from '../components/Epoch';
+import moment from 'moment-timezone';
+import EpochToDate from '../components/EpochToDate';
 import DateToEpoch from '../components/DateToEpoch';
 
-export default () => (
-  <LocaleProvider locale={enUS}>
-    <div>
-      <Head>
-        <link rel="stylesheet" href="/static/styles.css" />
-      </Head>
+
+class Index extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.changeTz = this.changeTz.bind(this);
+    this.changeTimestapAndFormat = this.changeTimestapAndFormat.bind(this);
+    this.clearTimestamp = this.clearTimestamp.bind(this);
+    this.changeDatetime = this.changeDatetime.bind(this);
+    this.clearDatetime = this.clearDatetime.bind(this);
+    this.renderApp = this.renderApp.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  componentDidMount() {
+    const currentDate = new Date();
+    const zones = moment.tz.names();
+
+    // TODO: User router to get shareable values from querystring
+    // const currentTz = query.tz && zones.indexOf(query.tz) > 0 ? query.tz : moment.tz.guess();
+    // const currentTimestamp = query.timestamp ? moment.unix(query.timestamp).tz(currentTz) : moment(currentDate).tz(currentTz);
+    // const currentDatetime = query.datetime ? moment.unix(query.datetime).tz(currentTz) : moment(currentDate).tz(currentTz);
+
+    const currentTz = moment.tz.guess();
+
+    const currentTimestamp = moment(currentDate).tz(currentTz);
+    const currentDatetime = moment(currentDate).tz(currentTz);
+
+    const initialState = {
+      zones,
+      currentTz,
+      currentTimestamp,
+      currentFormat: 'x',
+      currentDatetime,
+    };
+
+    this.setState({ ...initialState });
+  }
+
+  reset() {
+    const currentTz = this.state.currentTz;
+    const currentDate = new Date();
+    const currentTimestamp = moment(currentDate).tz(currentTz);
+    const currentDatetime = moment(currentDate).tz(currentTz);
+
+    this.setState({
+      currentTimestamp: currentTimestamp,
+      currentDatetime: currentDatetime
+    });
+  }
+
+  changeTz(tz) {
+    this.setState({
+      currentTz: tz,
+      currentTimestamp: this.state.currentTimestamp.clone().tz(tz),
+      currentDatetime: this.state.currentDatetime.clone().tz(tz)
+    });
+  }
+
+  changeTimestapAndFormat(timestamp, format = 'x') {
+    this.setState({
+      currentTimestamp: moment(timestamp).tz(this.state.currentTz),
+      currentFormat: format
+    });
+  }
+
+  clearTimestamp() {
+    this.setState({ currentTimestamp: '' });
+  }
+
+  changeDatetime(datetime) {
+    this.setState({
+      currentDatetime: moment(datetime).tz(this.state.currentTz)
+    });
+  }
+
+  clearDatetime() {
+    this.setState({ currentDatetime: '' });
+  }
+
+  renderApp() {
+    const {
+      zones,
+      currentTz,
+      currentTimestamp,
+      currentFormat,
+      currentDatetime
+    } = this.state;
+
+    return (
       <div className="container">
         <div className="card">
           <div className="card-header">
             <h1>Epoch converter</h1>
           </div>
+          <div className="controls">
+            <Select
+                showSearch
+                optionFilterProp="children"
+                style={{ width: 280 }}
+                defaultValue={currentTz}
+                name="select"
+                onChange={this.changeTz}
+                filterOption={(input, option) =>
+                  option.props.children
+                    .toLowerCase()
+                    .indexOf(input.toLowerCase()) >= 0
+                }
+              >
+              {zones.map((zone, index) => (
+                <Select.Option key={index} value={zone}>
+                  {zone}
+                </Select.Option>
+              ))}
+            </Select>
+            <Button onClick={this.reset}>Reset to Current Date</Button>
+          </div>
           <div className="card-content">
-            <Current />
-            <Epoch />
-            <DateToEpoch />
+            <EpochToDate
+              tz={currentTz}
+              timestamp={currentTimestamp}
+              format={currentFormat}
+              handleChangeTimestamp={this.changeTimestapAndFormat}
+              handleClearTimestamp={this.clearTimestamp}
+            />
+            <DateToEpoch
+              tz={currentTz}
+              datetime={currentDatetime}
+              handleChangeDatetime={this.changeDatetime}
+              handleClearDatetime={this.clearDatetime}
+            />
           </div>
           <div className="text-center">
-            <a href="https://github.com/dinkbit/epoch/issues/new" target="_blank">feedback</a>
+            <a
+              href="https://github.com/dinkbit/epoch/issues/new"
+              target="_blank"
+            >
+              feedback
+            </a>
             <Divider type="vertical" />
-            <a href="https://github.com/dinkbit/epoch" target="_blank">source</a>
+            <a href="https://github.com/dinkbit/epoch" target="_blank">
+              source
+            </a>
           </div>
         </div>
       </div>
-    </div>
-  </LocaleProvider>
-);
+    );
+  }
+
+  render() {
+    return (
+      <ConfigProvider locale={enUS}>
+        <div>
+          {!this.state ? <div /> : this.renderApp()}
+        </div>
+        <style jsx global>{`
+          html,
+          body {
+            height: 100%;
+          }
+          body > div:first-of-type {
+            height: 100%;
+          }
+          body {
+            font-weight: 400;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            box-sizing: border-box;
+          }
+
+          // #__next {
+          //   height: 100%;
+          // }
+
+          // #__next > div {
+          //   height: 100%;
+          // }
+
+          // #__next > div > div {
+          //   height: 100%;
+          // }
+
+          h1 {
+            margin: 0;
+          }
+
+          .card-header {
+            margin-bottom: 15px;
+          }
+
+          .box-header {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-kerning: 1.5;
+            font-size: 12px;
+          }
+
+          .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1 1 auto;
+            margin: 15px 0px;
+          }
+
+          .controls {
+            padding: 0px 12px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .card {
+            width: 650px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+          }
+
+          .card-header {
+            flex-shrink: 0;
+            height: 48px;
+            padding: 0px 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .card-content {
+            padding: 15px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+          }
+
+          .text-center {
+            text-align: center;
+          }
+
+          .well {
+            border-radius: 4px;
+            border: 1px solid rgb(218, 225, 233);
+          }
+
+          .padding-sm {
+            padding: 5px;
+          }
+
+          .padding-md {
+            padding: 10px;
+          }
+
+          .padding-lg {
+            padding: 15px;
+          }
+
+          .margin-sm {
+            margin: 5px;
+          }
+
+          .margin-md {
+            margin: 10px;
+          }
+
+          .margin-lg {
+            margin: 15px;
+          }
+
+          .margin-top-sm {
+            margin-top: 5px;
+          }
+
+          .margin-top-md {
+            margin-top: 10px;
+          }
+
+          .margin-top-lg {
+            margin-top: 15px;
+          }
+
+          .margin-bottom-sm {
+            margin-bottom: 5px;
+          }
+
+          .margin-bottom-md {
+            margin-bottom: 10px;
+          }
+
+          .margin-bottom-lg {
+            margin-bottom: 15px;
+          }
+
+          .table {
+            border-collapse:collapse;
+            border-spacing:0;
+            width:100%;
+            display:table;
+          }
+
+          .table td,.table th {
+            padding:8px 8px;
+            display:table-cell;
+            text-align:left;
+            vertical-align:top;
+          }
+        `}</style>
+      </ConfigProvider>
+    );
+  }
+}
+
+export default Index;

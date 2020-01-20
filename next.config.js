@@ -1,31 +1,23 @@
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const withLess = require('@zeit/next-less')
+const lessToJS = require('less-vars-to-js')
+const fs = require('fs')
+const path = require('path')
 
-module.exports = {
-  webpack: (config, { dev }) => {
-    config.module.rules.push(
-      {
-        test: /\.(less)/,
-        loader: 'emit-file-loader',
-        options: {
-          name: 'dist/[path][name].[ext]'
-        }
-      },
-      {
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader!less-loader'
-        })
-        // use this for development - see here https://github.com/aoc/with-ant-design-custom-theme
-        //use: ['babel-loader', 'raw-loader', 'less-loader']
-      }
-    );
+module.exports = () => {
+  // Where your antd-custom.less file lives
+  const themeVariables = lessToJS(
+    fs.readFileSync(path.resolve(__dirname, './styles/antd-custom.less'), 'utf8')
+  )
 
-    config.plugins.push(
-      new ExtractTextPlugin(__dirname + '/static/styles.css')
-    );
-
-    return config;
+  // fix: prevents error when .less files are required by node
+  if (typeof require !== 'undefined') {
+    require.extensions['.less'] = file => {}
   }
+
+  return withLess({
+    lessLoaderOptions: {
+      javascriptEnabled: true,
+      modifyVars: themeVariables // make your antd custom effective
+    }
+  })
 };

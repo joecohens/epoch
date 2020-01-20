@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { DatePicker, Row, Col } from 'antd';
 import moment from 'moment';
 
-export default class DateToEpoch extends Component {
+import Table from './shared/Table';
+
+export default class DateToEpoch extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { datetime: moment() };
 
     this.onChangeDateTime = this.onChangeDateTime.bind(this);
   }
@@ -14,27 +14,46 @@ export default class DateToEpoch extends Component {
   emitEmpty = () => {
     this.dateTimeInput.focus();
 
-    this.setState({ datetime: '' });
+    this.props.handleClearDatetime();
   };
 
   onChangeDateTime(value) {
-    const datetime = value;
+    const { datetime, tz } = this.props;
 
-    if (datetime && !datetime.isValid()) {
+    const selectedDatetime = moment(value).tz(tz);
+
+    if (selectedDatetime && !selectedDatetime.isValid()) {
       return;
     }
 
-    const currentDate = this.state.date;
+    const currentDatetime =
+      typeof datetime === 'string' || datetime instanceof String
+        ? moment(datetime).tz(tz)
+        : datetime;
 
-    if (currentDate && datetime.isSame(currentDate)) {
+    if (selectedDatetime && selectedDatetime.isSame(currentDatetime)) {
       return;
     }
 
-    this.setState({ datetime });
+    this.props.handleChangeDatetime(selectedDatetime);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.datetime !== nextProps.datetime || this.props.tz !== nextProps.tz) {
+      return true;
+    }
+
+    return false;
   }
 
   render() {
-    const { datetime } = this.state;
+    const { datetime, tz } = this.props;
+
+    const currentDatetime =
+      datetime !== '' &&
+      (typeof datetime === 'string' || datetime instanceof String)
+        ? moment(datetime).tz(tz)
+        : datetime;
 
     return (
       <div className="well padding-lg margin-top-lg">
@@ -42,22 +61,15 @@ export default class DateToEpoch extends Component {
         <DatePicker
           style={{ width: '100%' }}
           showTime
-          defaultValue={datetime}
+          defaultValue={currentDatetime}
           format="YYYY-MM-DD HH:mm:ss"
           size="large"
           name="date"
           onChange={this.onChangeDateTime}
           ref={node => (this.dateTimeInput = node)}
         />
-        <div className="margin-top-md text-center">
-          <Row gutter={16}>
-            <Col span={12}>
-              Seconds: {datetime ? datetime.format('X') : null}
-            </Col>
-            <Col span={12}>
-              Milliseconds: {datetime ? datetime.format('x') : null}
-            </Col>
-          </Row>
+        <div className="margin-top-md">
+          <Table dateTime={currentDatetime} tz={tz} />
         </div>
       </div>
     );
