@@ -176,24 +176,8 @@ class Index extends React.Component {
             box-sizing: border-box;
           }
 
-          // #__next {
-          //   height: 100%;
-          // }
-
-          // #__next > div {
-          //   height: 100%;
-          // }
-
-          // #__next > div > div {
-          //   height: 100%;
-          // }
-
           h1 {
             margin: 0;
-          }
-
-          .card-header {
-            margin-bottom: 15px;
           }
 
           .box-header {
@@ -228,7 +212,8 @@ class Index extends React.Component {
           .card-header {
             flex-shrink: 0;
             height: 48px;
-            padding: 0px 20px;
+            padding: 0px 10px;
+            margin-bottom: 15px;
             box-sizing: border-box;
             display: flex;
             justify-content: space-between;
