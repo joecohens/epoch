@@ -6,7 +6,6 @@ import moment from 'moment-timezone';
 import EpochToDate from '../components/EpochToDate';
 import DateToEpoch from '../components/DateToEpoch';
 
-
 class Index extends React.Component {
   constructor(props) {
     super(props);
