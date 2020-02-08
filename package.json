@@ -20,6 +20,7 @@
     "next": "^9.1.5",
     "null-loader": "^3.0.0",
     "react": "^16.12.0",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.12.0"
   }
 }

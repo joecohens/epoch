@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { ConfigProvider, Divider, Select, Button } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
 import moment from 'moment-timezone';
+import Live from '../components/Live';
 import EpochToDate from '../components/EpochToDate';
 import DateToEpoch from '../components/DateToEpoch';
 
@@ -15,6 +16,8 @@ class Index extends React.Component {
     this.clearTimestamp = this.clearTimestamp.bind(this);
     this.changeDatetime = this.changeDatetime.bind(this);
     this.clearDatetime = this.clearDatetime.bind(this);
+    this.setSODDatetime = this.setSODDatetime.bind(this);
+    this.setEODDatetime = this.setEODDatetime.bind(this);
     this.renderApp = this.renderApp.bind(this);
     this.reset = this.reset.bind(this);
   }
@@ -81,6 +84,18 @@ class Index extends React.Component {
     });
   }
 
+  setSODDatetime() {
+    this.setState({
+      currentDatetime: this.state.currentDatetime.startOf('day')
+    });
+  }
+
+  setEODDatetime() {
+    this.setState({
+      currentDatetime: this.state.currentDatetime.endOf('day')
+    });
+  }
+
   clearDatetime() {
     this.setState({ currentDatetime: '' });
   }
@@ -123,6 +138,7 @@ class Index extends React.Component {
             <Button onClick={this.reset}>Reset to Current Date</Button>
           </div>
           <div className="card-content">
+            <Live tz={currentTz} />
             <EpochToDate
               tz={currentTz}
               timestamp={currentTimestamp}
@@ -133,6 +149,8 @@ class Index extends React.Component {
             <DateToEpoch
               tz={currentTz}
               datetime={currentDatetime}
+              handleStartOfDay={this.setSODDatetime}
+              handleEndOfDay={this.setEODDatetime}
               handleChangeDatetime={this.changeDatetime}
               handleClearDatetime={this.clearDatetime}
             />
@@ -284,17 +302,20 @@ class Index extends React.Component {
           }
 
           .table {
-            border-collapse:collapse;
-            border-spacing:0;
-            width:100%;
-            display:table;
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            display: table;
           }
 
-          .table td,.table th {
-            padding:8px 8px;
-            display:table-cell;
-            text-align:left;
-            vertical-align:top;
+          .table td, .table th {
+            padding: 8px 2px;
+            display: table-cell;
+            vertical-align: top;
+          }
+
+          .uppercase {
+            text-transform: uppercase;
           }
         `}</style>
       </ConfigProvider>
