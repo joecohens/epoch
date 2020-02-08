@@ -2,7 +2,7 @@
   "name": "epoch",
   "version": "1.0.0",
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "dev": "next",
     "build": "next build",
