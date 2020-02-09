@@ -35,20 +35,20 @@ export default class Current extends Component {
 
     return (
       <div className="margin-top-lg">
-        <Row gutter={16}>
-          <Col span={8}>
+        <Row gutter={[8, 8]}>
+          <Col xs={24} md={8}>
             {this.renderHeader(
               'Unix seconds',
               timestamp ? timestamp.format('X') : null
             )}
           </Col>
-          <Col span={8}>
+          <Col xs={24} md={8}>
             {this.renderHeader(
               'Unix milliseconds',
               timestamp ? timestamp.format('x') : null
             )}
           </Col>
-          <Col span={8}>
+          <Col xs={24} md={8}>
             {this.renderHeader(
               'Current time',
               timestamp ? timestamp.format('YYYY-MM-DD HH:mm:ss') : null

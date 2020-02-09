@@ -119,7 +119,6 @@ class Index extends React.Component {
             <Select
                 showSearch
                 optionFilterProp="children"
-                style={{ width: 280 }}
                 defaultValue={currentTz}
                 name="select"
                 onChange={this.changeTz}
@@ -220,7 +219,6 @@ class Index extends React.Component {
           }
 
           .card {
-            width: 650px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -316,6 +314,28 @@ class Index extends React.Component {
 
           .uppercase {
             text-transform: uppercase;
+          }
+
+          .mobile {
+            display: block !important;
+          }
+
+          .desktop {
+            display: none !important;
+          }
+
+          @media only screen and (min-width: 640px) {
+            .card {
+              min-width: 640px;
+            }
+
+            .mobile {
+              display: none !important;
+            }
+
+            .desktop {
+              display: block !important;
+            }
           }
         `}</style>
       </ConfigProvider>

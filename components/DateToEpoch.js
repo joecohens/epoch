@@ -70,8 +70,8 @@ export default class DateToEpoch extends React.Component {
     return (
       <div className="well padding-lg margin-top-lg">
         <h3>Convert to timestamp</h3>
-        <Row gutter={24} type="flex" justify="space-between">
-          <Col xs={14} md={18}>
+        <Row gutter={[8, 8]}>
+          <Col>
             <DatePicker
               style={{ width: '100%' }}
               showTime
@@ -83,11 +83,13 @@ export default class DateToEpoch extends React.Component {
               ref={node => (this.dateTimeInput = node)}
             />
           </Col>
-          <Col xs={8} md={6}>
-            <ButtonGroup>
-              <Button size="large" onClick={this.onStartOfDay}>SOD</Button>
-              <Button size="large" onClick={this.onEndOfDay}>EOD</Button>
-            </ButtonGroup>
+        </Row>
+        <Row gutter={[8, 8]}>
+          <Col span={12}>
+            <Button block={true} onClick={this.onStartOfDay}>Start of Day</Button>
+          </Col>
+          <Col span={12}>
+            <Button block={true} onClick={this.onEndOfDay}>End of Day</Button>
           </Col>
         </Row>
         <div className="margin-top-md">
