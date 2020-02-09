@@ -76,6 +76,7 @@ export default class DateToEpoch extends React.Component {
               style={{ width: '100%' }}
               showTime
               defaultValue={currentDatetime}
+              value={currentDatetime}
               format="YYYY-MM-DD HH:mm:ss"
               size="large"
               name="date"
