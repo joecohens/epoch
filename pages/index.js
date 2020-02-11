@@ -118,6 +118,7 @@ class Index extends React.Component {
           <div className="controls">
             <Select
                 showSearch
+                style={{ width: '70%' }}
                 optionFilterProp="children"
                 defaultValue={currentTz}
                 name="select"
