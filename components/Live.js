@@ -6,7 +6,7 @@ export default class Current extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { timestamp: moment() };
+    this.state = { timestamp: moment().tz(props.tz) };
   }
 
   componentDidMount() {
@@ -18,13 +18,13 @@ export default class Current extends Component {
   }
 
   tick() {
-    this.setState({ timestamp: moment() });
+    this.setState({ timestamp: moment().tz(this.props.tz) });
   }
 
   renderHeader(name, time) {
     return (
       <div className="well text-center padding-sm">
-        <h2>{name}</h2>
+        <h4 className="uppercase margin-top-lg">{name}</h4>
         <p>{time}</p>
       </div>
     );
@@ -34,21 +34,21 @@ export default class Current extends Component {
     const { timestamp } = this.state;
 
     return (
-      <div className="margin-bottom-md">
-        <Row gutter={16}>
-          <Col span={8}>
+      <div className="margin-top-lg">
+        <Row gutter={[8, 8]}>
+          <Col xs={24} md={8}>
             {this.renderHeader(
               'Unix seconds',
               timestamp ? timestamp.format('X') : null
             )}
           </Col>
-          <Col span={8}>
+          <Col xs={24} md={8}>
             {this.renderHeader(
               'Unix milliseconds',
               timestamp ? timestamp.format('x') : null
             )}
           </Col>
-          <Col span={8}>
+          <Col xs={24} md={8}>
             {this.renderHeader(
               'Current time',
               timestamp ? timestamp.format('YYYY-MM-DD HH:mm:ss') : null
