@@ -1,12 +1,11 @@
 "use client";
 import React from 'react';
-import Head from 'next/head';
 // import { ConfigProvider, Divider, Select, Button } from 'antd';
 // import enUS from 'antd/lib/locale-provider/en_US';
 import moment from 'moment-timezone';
-import Live from '../components/Live';
-import EpochToDate from '../components/EpochToDate';
-import DateToEpoch from '../components/DateToEpoch';
+import Live from '@/components/Live';
+import EpochToDate from '@/components/epoch-to-date';
+import DateToEpoch from '@/components/date-to-epoch';
 
 class Index extends React.Component {
   constructor(props) {

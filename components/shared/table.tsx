@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 // import { message, Button, Row, Col } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 

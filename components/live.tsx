@@ -26,15 +26,6 @@ export default class Current extends Component {
     this.setState({ timestamp: moment().tz(this.props.tz) });
   }
 
-  renderHeader(name, time) {
-    return (
-      <div className="well text-center padding-sm">
-        <h4 className="uppercase margin-top-lg">{name}</h4>
-        <p>{time}</p>
-      </div>
-    );
-  }
-
   render() {
     const { timestamp } = this.state;
 
@@ -52,14 +43,30 @@ export default class Current extends Component {
             </div>
           </CardContent>
         </Card>
-        {this.renderHeader(
-          'Unix milliseconds',
-          timestamp ? timestamp.format('x') : null
-        )}
-        {this.renderHeader(
-          'Current time',
-          timestamp ? timestamp.format('YYYY-MM-DD HH:mm:ss') : null
-        )}
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              Unix Milliseconds
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {timestamp ? timestamp.format('x') : null}
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              Current Time
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {timestamp ? timestamp.format('YYYY-MM-DD HH:mm:ss') : null}
+            </div>
+          </CardContent>
+        </Card>
       </div >
     );
   }

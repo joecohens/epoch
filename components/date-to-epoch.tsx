@@ -1,11 +1,14 @@
-import React from 'react';
-// import { DatePicker, Button, Row, Col } from 'antd';
+import React from 'react'
+import moment from 'moment'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import moment from 'moment';
 
-import Table from './shared/Table';
-
-//const ButtonGroup = Button.Group;
+import Table from '@/components/shared/table'
 
 export default class DateToEpoch extends React.Component {
   constructor(props) {
@@ -69,9 +72,17 @@ export default class DateToEpoch extends React.Component {
         : datetime;
 
     return (
-      <div className="well padding-lg margin-top-lg">
-        <h3>Convert to timestamp</h3>
-        {/*
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              Convert to timestamp
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Table dateTime={currentDatetime} tz={tz} />
+          </CardContent>
+          {/*
         <Row gutter={[8, 8]}>
           <Col>
             <DatePicker
@@ -88,11 +99,9 @@ export default class DateToEpoch extends React.Component {
           </Col>
         </Row>
         */}
-        <Button block={true} onClick={this.onStartOfDay}>Start of Day</Button>
-        <Button block={true} onClick={this.onEndOfDay}>End of Day</Button>
-        <div className="margin-top-md">
-          <Table dateTime={currentDatetime} tz={tz} />
-        </div>
+          <Button block={true} onClick={this.onStartOfDay}>Start of Day</Button>
+          <Button block={true} onClick={this.onEndOfDay}>End of Day</Button>
+        </Card>
       </div>
     );
   }

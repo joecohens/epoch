@@ -1,8 +1,13 @@
-import React from 'react';
+import React from 'react'
+import moment from 'moment-timezone'
 // import { Input, Icon } from 'antd';
-import moment from 'moment-timezone';
-
-import Table from './shared/Table';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import Table from '@/components/shared/table';
 
 export default class EpochToDate extends React.Component {
   emitEmpty = () => {
@@ -59,9 +64,17 @@ export default class EpochToDate extends React.Component {
     ) : null;
 
     return (
-      <div className="well padding-lg margin-top-md">
-        <h3>Convert to datetime</h3>
-        {/*
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              Convert to datetime
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Table dateTime={currentTimestamp} tz={tz} />
+          </CardContent>
+          {/*
         <Input
           size="large"
           suffix={suffix}
@@ -70,9 +83,7 @@ export default class EpochToDate extends React.Component {
           ref={node => (this.timestampInput = node)}
         />
         */}
-        <div className="margin-top-md">
-          <Table dateTime={currentTimestamp} tz={tz} />
-        </div>
+        </Card >
       </div>
     );
   }
