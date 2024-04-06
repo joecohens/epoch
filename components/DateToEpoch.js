@@ -1,5 +1,6 @@
 import React from 'react';
 // import { DatePicker, Button, Row, Col } from 'antd';
+import { Button } from "@/components/ui/button"
 import moment from 'moment';
 
 import Table from './shared/Table';
@@ -86,18 +87,12 @@ export default class DateToEpoch extends React.Component {
             />
           </Col>
         </Row>
-        <Row gutter={[8, 8]}>
-          <Col span={12}>
-            <Button block={true} onClick={this.onStartOfDay}>Start of Day</Button>
-          </Col>
-          <Col span={12}>
-            <Button block={true} onClick={this.onEndOfDay}>End of Day</Button>
-          </Col>
-        </Row>
+        */}
+        <Button block={true} onClick={this.onStartOfDay}>Start of Day</Button>
+        <Button block={true} onClick={this.onEndOfDay}>End of Day</Button>
         <div className="margin-top-md">
           <Table dateTime={currentDatetime} tz={tz} />
         </div>
-        */}
       </div>
     );
   }
