@@ -1,5 +1,5 @@
 import React from 'react';
-import { message, Button, Row, Col } from 'antd';
+// import { message, Button, Row, Col } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const info = () => {
@@ -19,7 +19,7 @@ const Table = ({ dateTime, tz }) => (
         </td>
         <td align="right">
           <CopyToClipboard text={dateTime ? dateTime.format('X') : null} onCopy={info}>
-            <Button type="dashed" size="small">Copy</Button>
+            <button type="dashed" size="small">Copy</button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -36,7 +36,7 @@ const Table = ({ dateTime, tz }) => (
             text={dateTime ? dateTime.format('x') : null}
             onCopy={info}
           >
-            <Button type="dashed" size="small">Copy</Button>
+            <button type="dashed" size="small">Copy</button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -57,7 +57,7 @@ const Table = ({ dateTime, tz }) => (
               : null}
             onCopy={info}
           >
-            <Button type="dashed" size="small">Copy</Button>
+            <button type="dashed" size="small">Copy</button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -78,7 +78,7 @@ const Table = ({ dateTime, tz }) => (
               : null}
             onCopy={info}
           >
-            <Button type="dashed" size="small">Copy</Button>
+            <button type="dashed" size="small">Copy</button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -99,7 +99,7 @@ const Table = ({ dateTime, tz }) => (
               : null}
             onCopy={info}
           >
-            <Button type="dashed" size="small">Copy</Button>
+            <button type="dashed" size="small">Copy</button>
           </CopyToClipboard>
         </td>
       </tr>

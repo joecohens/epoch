@@ -1,10 +1,10 @@
 import React from 'react';
-import { DatePicker, Button, Row, Col } from 'antd';
+// import { DatePicker, Button, Row, Col } from 'antd';
 import moment from 'moment';
 
 import Table from './shared/Table';
 
-const ButtonGroup = Button.Group;
+//const ButtonGroup = Button.Group;
 
 export default class DateToEpoch extends React.Component {
   constructor(props) {
@@ -63,13 +63,14 @@ export default class DateToEpoch extends React.Component {
 
     const currentDatetime =
       datetime !== '' &&
-      (typeof datetime === 'string' || datetime instanceof String)
+        (typeof datetime === 'string' || datetime instanceof String)
         ? moment(datetime).tz(tz)
         : datetime;
 
     return (
       <div className="well padding-lg margin-top-lg">
         <h3>Convert to timestamp</h3>
+        {/*
         <Row gutter={[8, 8]}>
           <Col>
             <DatePicker
@@ -96,6 +97,7 @@ export default class DateToEpoch extends React.Component {
         <div className="margin-top-md">
           <Table dateTime={currentDatetime} tz={tz} />
         </div>
+        */}
       </div>
     );
   }

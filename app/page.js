@@ -1,7 +1,8 @@
+"use client";
 import React from 'react';
 import Head from 'next/head';
-import { ConfigProvider, Divider, Select, Button } from 'antd';
-import enUS from 'antd/lib/locale-provider/en_US';
+// import { ConfigProvider, Divider, Select, Button } from 'antd';
+// import enUS from 'antd/lib/locale-provider/en_US';
 import moment from 'moment-timezone';
 import Live from '../components/Live';
 import EpochToDate from '../components/EpochToDate';
@@ -115,20 +116,21 @@ class Index extends React.Component {
           <div className="card-header">
             <h1>Epoch converter</h1>
           </div>
+          {/*
           <div className="controls">
             <Select
-                showSearch
-                style={{ width: '70%' }}
-                optionFilterProp="children"
-                defaultValue={currentTz}
-                name="select"
-                onChange={this.changeTz}
-                filterOption={(input, option) =>
-                  option.props.children
-                    .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0
-                }
-              >
+              showSearch
+              style={{ width: '70%' }}
+              optionFilterProp="children"
+              defaultValue={currentTz}
+              name="select"
+              onChange={this.changeTz}
+              filterOption={(input, option) =>
+                option.props.children
+                  .toLowerCase()
+                  .indexOf(input.toLowerCase()) >= 0
+              }
+            >
               {zones.map((zone, index) => (
                 <Select.Option key={index} value={zone}>
                   {zone}
@@ -137,6 +139,7 @@ class Index extends React.Component {
             </Select>
             <Button onClick={this.reset}>Reset to Current Date</Button>
           </div>
+          */}
           <div className="card-content">
             <Live tz={currentTz} />
             <EpochToDate
@@ -162,19 +165,18 @@ class Index extends React.Component {
             >
               feedback
             </a>
-            <Divider type="vertical" />
             <a href="https://github.com/dinkbit/epoch" target="_blank">
               source
             </a>
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 
   render() {
     return (
-      <ConfigProvider locale={enUS}>
+      <div>
         <div>
           {!this.state ? <div /> : this.renderApp()}
         </div>
@@ -339,9 +341,10 @@ class Index extends React.Component {
             }
           }
         `}</style>
-      </ConfigProvider>
+      </div>
     );
   }
 }
 
 export default Index;
+

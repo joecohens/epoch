@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'antd';
+// import { Row, Col } from 'antd';
 import moment from 'moment';
 
 export default class Current extends Component {
@@ -35,27 +35,19 @@ export default class Current extends Component {
 
     return (
       <div className="margin-top-lg">
-        <Row gutter={[8, 8]}>
-          <Col xs={24} md={8}>
-            {this.renderHeader(
-              'Unix seconds',
-              timestamp ? timestamp.format('X') : null
-            )}
-          </Col>
-          <Col xs={24} md={8}>
-            {this.renderHeader(
-              'Unix milliseconds',
-              timestamp ? timestamp.format('x') : null
-            )}
-          </Col>
-          <Col xs={24} md={8}>
-            {this.renderHeader(
-              'Current time',
-              timestamp ? timestamp.format('YYYY-MM-DD HH:mm:ss') : null
-            )}
-          </Col>
-        </Row>
-      </div>
+        {this.renderHeader(
+          'Unix seconds',
+          timestamp ? timestamp.format('X') : null
+        )}
+        {this.renderHeader(
+          'Unix milliseconds',
+          timestamp ? timestamp.format('x') : null
+        )}
+        {this.renderHeader(
+          'Current time',
+          timestamp ? timestamp.format('YYYY-MM-DD HH:mm:ss') : null
+        )}
+      </div >
     );
   }
 }
