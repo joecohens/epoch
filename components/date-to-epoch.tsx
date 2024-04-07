@@ -36,7 +36,7 @@ export default function DateToEpoch({
 }: Props) {
   const [date, setDate] = React.useState<Date>(datetime.toDate());
 
-  const onChangeDateTime = (value: any) => {
+  const onChangeDate = (value: any) => {
     const selectedDatetime = moment(value).tz(currentTz);
 
     if (selectedDatetime && !selectedDatetime.isValid()) {
@@ -45,7 +45,27 @@ export default function DateToEpoch({
 
     const currentDatetime =
       typeof datetime === 'string' || datetime instanceof String
-        ? moment(datetime).tz(currentTz)
+        ? moment(datetime).milliseconds(0).tz(currentTz)
+        : datetime;
+
+    if (selectedDatetime && selectedDatetime.isSame(currentDatetime)) {
+      return;
+    }
+
+    handleChangeDatetime(selectedDatetime.set({ hours: date.getHours(), minutes: date.getMinutes(), seconds: date.getSeconds() }));
+    setDate(selectedDatetime.toDate())
+  }
+
+  const onChangeTime = (value: any) => {
+    const selectedDatetime = moment(value).tz(currentTz);
+
+    if (selectedDatetime && !selectedDatetime.isValid()) {
+      return;
+    }
+
+    const currentDatetime =
+      typeof datetime === 'string' || datetime instanceof String
+        ? moment(datetime).milliseconds(0).tz(currentTz)
         : datetime;
 
     if (selectedDatetime && selectedDatetime.isSame(currentDatetime)) {
@@ -98,11 +118,11 @@ export default function DateToEpoch({
                 <Calendar
                   mode="single"
                   selected={date}
-                  onSelect={onChangeDateTime}
+                  onSelect={onChangeDate}
                   initialFocus
                 />
                 <div className="p-3 border-t border-border">
-                  <TimePicker setDate={onChangeDateTime} date={date} />
+                  <TimePicker setDate={onChangeTime} date={date} />
                 </div>
               </PopoverContent>
             </Popover>
