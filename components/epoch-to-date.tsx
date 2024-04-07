@@ -63,7 +63,7 @@ export default function EpochToDate({
             value={currentTimestamp ? currentTimestamp.format(format) : ''}
             onChange={onChangeTimestamp}
           />
-          <Table dateTime={currentTimestamp} tz={currentTz} />
+          <Table dateTime={currentTimestamp} currentTz={currentTz} />
         </CardContent>
       </Card >
     </div>

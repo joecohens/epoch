@@ -58,15 +58,15 @@ export default function Page() {
     return (
       <div className="flex justify-center">
         <div className="container max-w-3xl">
-          <div className="card">
-            <div className="card-header">
-              <h1>Epoch converter</h1>
+          <div>
+            <div className="my-4">
+              <h1 className="text-3xl font-bold">Epoch converter</h1>
             </div>
             <div className="flex gap-x-1 mb-3">
               <TimezoneSelector timezones={timezones} currentTz={currentTz} setCurrentTz={setCurrentTz} />
               <Button variant="outline" onClick={() => reset()}>Reset</Button>
             </div>
-            <div className="">
+            <div>
               <Live currentTz={currentTz} />
               <EpochToDate
                 currentTz={currentTz}
@@ -80,14 +80,16 @@ export default function Page() {
                 handleChangeDatetime={changeDatetime}
               />
             </div>
-            <div className="text-center">
+            <div className="text-center flex justify-center gap-x-2 text-sm mb-3">
               <a
-                href="https://github.com/dinkbit/epoch/issues/new"
+                href="https://github.com/joecohens/epoch/issues/new"
                 target="_blank"
               >
                 feedback
               </a>
-              <a href="https://github.com/dinkbit/epoch" target="_blank">
+              <a href="https://github.com/joecohens/epoch"
+                target="_blank"
+              >
                 source
               </a>
             </div>

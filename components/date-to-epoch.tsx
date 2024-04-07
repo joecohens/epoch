@@ -109,7 +109,7 @@ export default function DateToEpoch({
             <Button variant="outline" onClick={() => setSODDatetime()}>Start of Day</Button>
             <Button variant="outline" onClick={() => setEODDatetime()}>End of Day</Button>
           </div>
-          <Table dateTime={currentDatetime} tz={currentTz} />
+          <Table dateTime={currentDatetime} currentTz={currentTz} />
         </CardContent>
       </Card>
     </div>
