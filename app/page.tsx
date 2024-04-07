@@ -4,10 +4,18 @@ import moment from "moment-timezone"
 import { Toaster } from "@/components/ui/toaster"
 import { Button } from "@/components/ui/button"
 
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+
 import TimezoneSelector from '@/components/timezone-selector'
 import Live from '@/components/live'
-import EpochToDate from '@/components/epoch-to-date'
-import DateToEpoch from '@/components/date-to-epoch'
+import FromTimestamp from '@/components/from-timestamp'
+import FromDatetime from '@/components/from-datetime'
+import FromISO from '@/components/from-iso'
 
 export default function Page() {
   const currentDate: Date = new Date();
@@ -15,6 +23,7 @@ export default function Page() {
   const initCurrentTz: string = moment.tz.guess();
   const initCurrentTimestamp = moment(currentDate).tz(initCurrentTz);
   const initCurrentDatetime = moment(currentDate).tz(initCurrentTz);
+  const initCurrentISODatetime = moment(currentDate).tz(initCurrentTz);
 
   // TODO: User router to get shareable values from querystring
   // const currentTz = query.tz && zones.indexOf(query.tz) > 0 ? query.tz : moment.tz.guess();
@@ -24,7 +33,7 @@ export default function Page() {
   const [currentTz, setCurrentTz] = React.useState(initCurrentTz)
   const [currentTimestamp, setCurrentTimestamp] = React.useState(initCurrentTimestamp)
   const [currentDatetime, setCurrentDatetime] = React.useState(initCurrentDatetime)
-  const [currentFormat, setCurrentFormat] = React.useState('x')
+  const [currentISODatetime, setCurrentISODatetime] = React.useState(initCurrentISODatetime)
   const [isClient, setIsClient] = React.useState(false)
 
   React.useEffect(() => {
@@ -34,24 +43,23 @@ export default function Page() {
   const reset = () => {
     const newTimestamp = moment(currentDate).tz(currentTz);
     const newDatetime = moment(currentDate).tz(currentTz);
+    const newISODatetime = moment(currentDate).tz(currentTz);
 
     setCurrentTimestamp(newTimestamp)
     setCurrentDatetime(newDatetime)
+    setCurrentDatetime(newISODatetime)
   }
 
-  // const changeTz = (tz) => {
-  //   setCurrentTz(tz)
-  //   setCurrentTimestamp(currentTimestamp.clone().tz(tz))
-  //   setCurrentDatetime(currentDatetime.clone().tz(tz))
-  // }
-
-  const changeTimestapAndFormat = (timestamp: string, format: string = 'x') => {
+  const changeTimestap = (timestamp: string) => {
     setCurrentTimestamp(moment(timestamp).tz(currentTz))
-    setCurrentFormat(format)
   }
 
   const changeDatetime = (datetime: string) => {
     setCurrentDatetime(moment(datetime).tz(currentTz))
+  }
+
+  const changeISODatetime = (datetime: string) => {
+    setCurrentISODatetime(moment(datetime).tz(currentTz))
   }
 
   const app = () => {
@@ -68,17 +76,34 @@ export default function Page() {
             </div>
             <div>
               <Live currentTz={currentTz} />
-              <EpochToDate
-                currentTz={currentTz}
-                timestamp={currentTimestamp}
-                format={currentFormat}
-                handleChangeTimestamp={changeTimestapAndFormat}
-              />
-              <DateToEpoch
-                currentTz={currentTz}
-                datetime={currentDatetime}
-                handleChangeDatetime={changeDatetime}
-              />
+              <Tabs defaultValue="timestamp" className="w-auto">
+                <TabsList>
+                  <TabsTrigger value="timestamp">Timestamp</TabsTrigger>
+                  <TabsTrigger value="datetime">Datetime</TabsTrigger>
+                  <TabsTrigger value="iso">ISO Date</TabsTrigger>
+                </TabsList>
+                <TabsContent value="timestamp">
+                  <FromTimestamp
+                    currentTz={currentTz}
+                    timestamp={currentTimestamp}
+                    handleChangeTimestamp={changeTimestap}
+                  />
+                </TabsContent>
+                <TabsContent value="datetime">
+                  <FromDatetime
+                    currentTz={currentTz}
+                    datetime={currentDatetime}
+                    handleChangeDatetime={changeDatetime}
+                  />
+                </TabsContent>
+                <TabsContent value="iso">
+                  <FromISO
+                    currentTz={currentTz}
+                    timestamp={currentISODatetime}
+                    handleChangeTimestamp={changeISODatetime}
+                  />
+                </TabsContent>
+              </Tabs>
             </div>
             <div className="text-center flex justify-center gap-x-2 text-sm mb-3">
               <a

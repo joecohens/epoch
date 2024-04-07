@@ -12,17 +12,17 @@ import Table from '@/components/shared/table';
 
 interface Props {
   currentTz: string,
-  format: string,
   timestamp: moment.Moment,
   handleChangeTimestamp: Function,
 }
 
-export default function EpochToDate({
+export default function FromTimestamp({
   currentTz,
   timestamp,
-  format,
   handleChangeTimestamp,
 }: Props) {
+  const [format, setFormat] = React.useState('x')
+
   const onChangeTimestamp = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const format = value && value.length > 10 ? 'x' : 'X';
@@ -41,7 +41,8 @@ export default function EpochToDate({
       return;
     }
 
-    handleChangeTimestamp(selectedTimestamp, format);
+    setFormat(format)
+    handleChangeTimestamp(selectedTimestamp);
   };
 
   const currentTimestamp =
@@ -54,7 +55,7 @@ export default function EpochToDate({
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">
-            Convert to datetime
+            Convert from Timestamp
           </CardTitle>
         </CardHeader>
         <CardContent>
