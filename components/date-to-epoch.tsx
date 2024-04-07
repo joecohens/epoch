@@ -102,8 +102,8 @@ export default function DateToEpoch({
                 </div>
               </PopoverContent>
             </Popover>
-            <Button block={true} onClick={() => setSODDatetime()}>Start of Day</Button>
-            <Button block={true} onClick={() => setEODDatetime()}>End of Day</Button>
+            <Button onClick={() => setSODDatetime()}>Start of Day</Button>
+            <Button onClick={() => setEODDatetime()}>End of Day</Button>
           </CardTitle>
         </CardHeader>
         <CardContent>
