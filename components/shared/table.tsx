@@ -25,11 +25,11 @@ export default function Table({ dateTime, currentTz }: Props) {
           </td>
           <td>
             <span className="box-header mobile">Unix Seconds</span>
-            {dateTime ? dateTime.format('X') : null}
+            {dateTime ? dateTime.format('X') : ""}
           </td>
           <td align="right">
             <CopyToClipboard
-              text={dateTime ? dateTime.format('X') : null}
+              text={dateTime ? dateTime.format('X') : ""}
               onCopy={() => toast({ title: COPY_TEXT })}
             >
               <Button variant="outline" size="sm">
@@ -48,7 +48,7 @@ export default function Table({ dateTime, currentTz }: Props) {
           </td>
           <td align="right">
             <CopyToClipboard
-              text={dateTime ? dateTime.format('x') : null}
+              text={dateTime ? dateTime.format('x') : ""}
               onCopy={() => toast({ title: COPY_TEXT })}
             >
               <Button variant="outline" size="sm">
@@ -65,13 +65,13 @@ export default function Table({ dateTime, currentTz }: Props) {
             <span className="box-header mobile">{currentTz}</span>
             {dateTime
               ? dateTime.format('MMMM Do YYYY, h:mm:ss a zZ')
-              : null}
+              : ""}
           </td>
           <td align="right">
             <CopyToClipboard
               text={dateTime
                 ? dateTime.format('MMMM Do YYYY, h:mm:ss a zZ')
-                : null}
+                : ""}
               onCopy={() => toast({ title: COPY_TEXT })}
             >
               <Button variant="outline" size="sm">
@@ -94,7 +94,7 @@ export default function Table({ dateTime, currentTz }: Props) {
             <CopyToClipboard
               text={dateTime
                 ? dateTime.clone().tz('utc').toISOString()
-                : null}
+                : ""}
               onCopy={() => toast({ title: COPY_TEXT })}
             >
               <Button variant="outline" size="sm">
@@ -111,13 +111,13 @@ export default function Table({ dateTime, currentTz }: Props) {
             <span className="box-header mobile">UTC RFC 2822</span>
             {dateTime
               ? dateTime.clone().tz('utc').toDate().toUTCString()
-              : null}
+              : ""}
           </td>
           <td align="right">
             <CopyToClipboard
               text={dateTime
                 ? dateTime.clone().tz('utc').toDate().toUTCString()
-                : null}
+                : ""}
               onCopy={() => toast({ title: COPY_TEXT })}
             >
               <Button variant="outline" size="sm">
