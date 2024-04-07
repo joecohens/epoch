@@ -72,17 +72,21 @@ export default function DateToEpoch({
       : datetime;
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="mb-3">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">
             Convert to timestamp
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex gap-x-1 my-2">
             <Popover>
               <PopoverTrigger asChild>
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[280px] justify-start text-left font-normal",
+                    "w-full justify-start text-left font-normal",
                     !date && "text-muted-foreground"
                   )}
                 >
@@ -102,11 +106,9 @@ export default function DateToEpoch({
                 </div>
               </PopoverContent>
             </Popover>
-            <Button onClick={() => setSODDatetime()}>Start of Day</Button>
-            <Button onClick={() => setEODDatetime()}>End of Day</Button>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
+            <Button variant="outline" onClick={() => setSODDatetime()}>Start of Day</Button>
+            <Button variant="outline" onClick={() => setEODDatetime()}>End of Day</Button>
+          </div>
           <Table dateTime={currentDatetime} tz={currentTz} />
         </CardContent>
       </Card>

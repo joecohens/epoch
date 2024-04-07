@@ -2,6 +2,7 @@
 import * as React from "react"
 import moment from "moment-timezone"
 import { Toaster } from "@/components/ui/toaster"
+import { Button } from "@/components/ui/button"
 
 import TimezoneSelector from '@/components/timezone-selector'
 import Live from '@/components/live'
@@ -30,26 +31,18 @@ export default function Page() {
     setIsClient(true)
   }, [])
 
-  // const reset = e => {
-  //   // const newDate = new Date();
-  //   const newTimestamp = moment(currentDate).tz(currentTz);
-  //   const newDatetime = moment(currentDate).tz(currentTz);
-  //
-  //   setCurrentTimestamp(newTimestamp)
-  //   setCurrentDatetime(newDatetime)
-  // }
-  //
+  const reset = () => {
+    const newTimestamp = moment(currentDate).tz(currentTz);
+    const newDatetime = moment(currentDate).tz(currentTz);
+
+    setCurrentTimestamp(newTimestamp)
+    setCurrentDatetime(newDatetime)
+  }
+
   // const changeTz = (tz) => {
   //   setCurrentTz(tz)
   //   setCurrentTimestamp(currentTimestamp.clone().tz(tz))
   //   setCurrentDatetime(currentDatetime.clone().tz(tz))
-  // }
-  //
-  // const clearTimestamp = () => {
-  //   setCurrentTimestamp()
-  // }
-  // const clearDatetime = () => {
-  //   setCurrentDatetime('')
   // }
 
   const changeTimestapAndFormat = (timestamp: string, format: string = 'x') => {
@@ -63,16 +56,17 @@ export default function Page() {
 
   const app = () => {
     return (
-      <div>
-        <div className="container">
+      <div className="flex justify-center">
+        <div className="container max-w-3xl">
           <div className="card">
             <div className="card-header">
               <h1>Epoch converter</h1>
             </div>
-            <div className="controls">
+            <div className="flex gap-x-1 mb-3">
               <TimezoneSelector timezones={timezones} currentTz={currentTz} setCurrentTz={setCurrentTz} />
+              <Button variant="outline" onClick={() => reset()}>Reset</Button>
             </div>
-            <div className="card-content">
+            <div className="">
               <Live currentTz={currentTz} />
               <EpochToDate
                 currentTz={currentTz}

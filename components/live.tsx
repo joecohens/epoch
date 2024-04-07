@@ -28,32 +28,8 @@ export default function Live({ currentTz }: Props) {
   }, [tick])
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Unix Seconds
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
-            {timestamp ? timestamp.format('X') : null}
-          </div>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Unix Milliseconds
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
-            {timestamp ? timestamp.format('x') : null}
-          </div>
-        </CardContent>
-      </Card>
-      <Card>
+    <div className="mb-3">
+      <Card className="mb-3">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">
             Current Time
@@ -65,6 +41,33 @@ export default function Live({ currentTz }: Props) {
           </div>
         </CardContent>
       </Card>
-    </div >
+      <div className="grid gap-2 md:grid-cols-1 lg:grid-cols-2">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              Unix Seconds
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {timestamp ? timestamp.format('X') : null}
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              Unix Milliseconds
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {timestamp ? timestamp.format('x') : null}
+            </div>
+          </CardContent>
+        </Card>
+      </div >
+
+    </div>
   );
 }

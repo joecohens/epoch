@@ -50,18 +50,19 @@ export default function EpochToDate({
       : timestamp;
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4" >
+    <div className="mb-3" >
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">
             Convert to datetime
-            <Input
-              value={currentTimestamp ? currentTimestamp.format(format) : ''}
-              onChange={onChangeTimestamp}
-            />
           </CardTitle>
         </CardHeader>
         <CardContent>
+          <Input
+            className="my-2"
+            value={currentTimestamp ? currentTimestamp.format(format) : ''}
+            onChange={onChangeTimestamp}
+          />
           <Table dateTime={currentTimestamp} tz={currentTz} />
         </CardContent>
       </Card >

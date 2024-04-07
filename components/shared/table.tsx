@@ -1,9 +1,10 @@
 "use client"
 
 import React from 'react'
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
+import { Copy as CopyIcon } from "lucide-react"
 
 const info = (toast: Function) => {
   //toast({ title: 'Copied to clipboard' });
@@ -25,7 +26,9 @@ const Table = ({ dateTime, tz }) => {
         <td align="right">
           <CopyToClipboard
             text={dateTime ? dateTime.format('X') : null} onCopy={info(toast)}>
-            <Button variant="outline" size="sm">Copy</Button>
+            <Button variant="outline" size="sm">
+              <CopyIcon size={14} />
+            </Button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -42,7 +45,9 @@ const Table = ({ dateTime, tz }) => {
             text={dateTime ? dateTime.format('x') : null}
             onCopy={info(toast)}
           >
-            <Button variant="outline" size="sm">Copy</Button>
+            <Button variant="outline" size="sm">
+              <CopyIcon size={14} />
+            </Button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -63,7 +68,9 @@ const Table = ({ dateTime, tz }) => {
               : null}
             onCopy={info(toast)}
           >
-            <Button variant="outline" size="sm">Copy</Button>
+            <Button variant="outline" size="sm">
+              <CopyIcon size={14} />
+            </Button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -84,7 +91,9 @@ const Table = ({ dateTime, tz }) => {
               : null}
             onCopy={info(toast)}
           >
-            <Button variant="outline" size="sm">Copy</Button>
+            <Button variant="outline" size="sm">
+              <CopyIcon size={14} />
+            </Button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -105,7 +114,9 @@ const Table = ({ dateTime, tz }) => {
               : null}
             onCopy={info(toast)}
           >
-            <Button variant="outline" size="sm">Copy</Button>
+            <Button variant="outline" size="sm">
+              <CopyIcon size={14} />
+            </Button>
           </CopyToClipboard>
         </td>
       </tr>

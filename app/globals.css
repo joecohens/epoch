@@ -1,235 +1,122 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
-  @layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 222.2 84% 4.9%;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-      --card: 0 0% 100%;
-      --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-      --popover: 0 0% 100%;
-      --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-      --primary: 222.2 47.4% 11.2%;
-      --primary-foreground: 210 40% 98%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
 
-      --secondary: 210 40% 96.1%;
-      --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-      --muted: 210 40% 96.1%;
-      --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-      --accent: 210 40% 96.1%;
-      --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-      --border: 214.3 31.8% 91.4%;
-      --input: 214.3 31.8% 91.4%;
-      --ring: 222.2 84% 4.9%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
 
-      --radius: 0.5rem;
-    }
-
-    .dark {
-      --background: 222.2 84% 4.9%;
-      --foreground: 210 40% 98%;
-
-      --card: 222.2 84% 4.9%;
-      --card-foreground: 210 40% 98%;
-
-      --popover: 222.2 84% 4.9%;
-      --popover-foreground: 210 40% 98%;
-
-      --primary: 210 40% 98%;
-      --primary-foreground: 222.2 47.4% 11.2%;
-
-      --secondary: 217.2 32.6% 17.5%;
-      --secondary-foreground: 210 40% 98%;
-
-      --muted: 217.2 32.6% 17.5%;
-      --muted-foreground: 215 20.2% 65.1%;
-
-      --accent: 217.2 32.6% 17.5%;
-      --accent-foreground: 210 40% 98%;
-
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 210 40% 98%;
-
-      --border: 217.2 32.6% 17.5%;
-      --input: 217.2 32.6% 17.5%;
-      --ring: 212.7 26.8% 83.9%;
-    }
+    --radius: 0.5rem;
   }
 
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
-        html,
-        body {
-          height: 100%;
-        }
-        body > div:first-of-type {
-          height: 100%;
-        }
-        body {
-          font-weight: 400;
-          -moz-osx-font-smoothing: grayscale;
-          text-rendering: optimizeLegibility;
-          box-sizing: border-box;
-        }
+}
 
-        h1 {
-          margin: 0;
-        }
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
 
-        .box-header {
-          text-transform: uppercase;
-          font-weight: bold;
-          font-kerning: 1.5;
-          font-size: 12px;
-        }
+.box-header {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-kerning: 1.5;
+  font-size: 12px;
+}
 
-        .container {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex: 1 1 auto;
-          margin: 15px 0px;
-        }
+.table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  display: table;
+}
 
-        .controls {
-          padding: 0px 12px;
-          box-sizing: border-box;
-          display: flex;
-          justify-content: space-between;
-        }
+.table td, .table th {
+  padding: 8px 2px;
+  display: table-cell;
+  vertical-align: top;
+}
 
-        .card {
-          box-sizing: border-box;
-          display: flex;
-          flex-direction: column;
-        }
+.uppercase {
+  text-transform: uppercase;
+}
 
-        .card-header {
-          flex-shrink: 0;
-          height: 48px;
-          padding: 0px 10px;
-          margin-bottom: 15px;
-          box-sizing: border-box;
-          display: flex;
-          justify-content: space-between;
-        }
+.mobile {
+  display: block !important;
+}
 
-        .card-content {
-          padding: 15px;
-          box-sizing: border-box;
-          display: flex;
-          flex-direction: column;
-          flex: 1 1 auto;
-        }
+.desktop {
+  display: none !important;
+}
 
-        .text-center {
-          text-align: center;
-        }
+@media only screen and (min-width: 640px) {
+  .card {
+    min-width: 640px;
+  }
 
-        .well {
-          border-radius: 4px;
-          border: 1px solid rgb(218, 225, 233);
-        }
+  .mobile {
+    display: none !important;
+  }
 
-        .padding-sm {
-          padding: 5px;
-        }
-
-        .padding-md {
-          padding: 10px;
-        }
-
-        .padding-lg {
-          padding: 15px;
-        }
-
-        .margin-sm {
-          margin: 5px;
-        }
-
-        .margin-md {
-          margin: 10px;
-        }
-
-        .margin-lg {
-          margin: 15px;
-        }
-
-        .margin-top-sm {
-          margin-top: 5px;
-        }
-
-        .margin-top-md {
-          margin-top: 10px;
-        }
-
-        .margin-top-lg {
-          margin-top: 15px;
-        }
-
-        .margin-bottom-sm {
-          margin-bottom: 5px;
-        }
-
-        .margin-bottom-md {
-          margin-bottom: 10px;
-        }
-
-        .margin-bottom-lg {
-          margin-bottom: 15px;
-        }
-
-        .table {
-          border-collapse: collapse;
-          border-spacing: 0;
-          width: 100%;
-          display: table;
-        }
-
-        .table td, .table th {
-          padding: 8px 2px;
-          display: table-cell;
-          vertical-align: top;
-        }
-
-        .uppercase {
-          text-transform: uppercase;
-        }
-
-        .mobile {
-          display: block !important;
-        }
-
-        .desktop {
-          display: none !important;
-        }
-
-        @media only screen and (min-width: 640px) {
-          .card {
-            min-width: 640px;
-          }
-
-          .mobile {
-            display: none !important;
-          }
-
-          .desktop {
-            display: block !important;
-          }
-        }
+  .desktop {
+    display: block !important;
+  }
+}
