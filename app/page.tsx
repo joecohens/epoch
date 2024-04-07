@@ -9,9 +9,9 @@ import EpochToDate from '@/components/epoch-to-date'
 import DateToEpoch from '@/components/date-to-epoch'
 
 export default function Page() {
-  const currentDate = new Date();
-  const timezones = moment.tz.names();
-  const initCurrentTz = moment.tz.guess();
+  const currentDate: Date = new Date();
+  const timezones: Array<string> = moment.tz.names();
+  const initCurrentTz: string = moment.tz.guess();
   const initCurrentTimestamp = moment(currentDate).tz(initCurrentTz);
   const initCurrentDatetime = moment(currentDate).tz(initCurrentTz);
 
@@ -30,33 +30,34 @@ export default function Page() {
     setIsClient(true)
   }, [])
 
-  const reset = e => {
-    // const newDate = new Date();
-    const newTimestamp = moment(currentDate).tz(currentTz);
-    const newDatetime = moment(currentDate).tz(currentTz);
+  // const reset = e => {
+  //   // const newDate = new Date();
+  //   const newTimestamp = moment(currentDate).tz(currentTz);
+  //   const newDatetime = moment(currentDate).tz(currentTz);
+  //
+  //   setCurrentTimestamp(newTimestamp)
+  //   setCurrentDatetime(newDatetime)
+  // }
+  //
+  // const changeTz = (tz) => {
+  //   setCurrentTz(tz)
+  //   setCurrentTimestamp(currentTimestamp.clone().tz(tz))
+  //   setCurrentDatetime(currentDatetime.clone().tz(tz))
+  // }
+  //
+  // const clearTimestamp = () => {
+  //   setCurrentTimestamp()
+  // }
+  // const clearDatetime = () => {
+  //   setCurrentDatetime('')
+  // }
 
-    setCurrentTimestamp(newTimestamp)
-    setCurrentDatetime(newDatetime)
+  const changeTimestapAndFormat = (timestamp: string, format: string = 'x') => {
+    setCurrentTimestamp(moment(timestamp).tz(currentTz))
+    setCurrentFormat(format)
   }
 
-  const changeTz = (tz) => {
-    setCurrentTz(tz)
-    setCurrentTimestamp(currentTimestamp.clone().tz(tz))
-    setCurrentDatetime(currentDatetime.clone().tz(tz))
-  }
-
-  const changeTimestapAndFormat = (timestamp, format = 'x') => {
-    setState({
-      currentTimestamp: moment(timestamp).tz(state.currentTz),
-      currentFormat: format
-    });
-  }
-
-  const clearTimestamp = () => {
-    setCurrentTimestamp('')
-  }
-
-  const changeDatetime = (datetime) => {
+  const changeDatetime = (datetime: string) => {
     setCurrentDatetime(moment(datetime).tz(currentTz))
   }
 
@@ -68,9 +69,6 @@ export default function Page() {
     setCurrentDatetime(currentDatetime.endOf('day'))
   }
 
-  const clearDatetime = () => {
-    setCurrentDatetime('')
-  }
 
   const app = () => {
     return (
@@ -84,13 +82,13 @@ export default function Page() {
               <TimezoneSelector timezones={timezones} currentTz={currentTz} setCurrentTz={setCurrentTz} />
             </div>
             <div className="card-content">
-              <Live tz={currentTz} />
+              <Live currentTz={currentTz} />
               <EpochToDate
                 tz={currentTz}
                 timestamp={currentTimestamp}
                 format={currentFormat}
                 handleChangeTimestamp={changeTimestapAndFormat}
-                handleClearTimestamp={clearTimestamp}
+                handleClearTimestamp={() => { }}
               />
               <DateToEpoch
                 tz={currentTz}
@@ -98,7 +96,7 @@ export default function Page() {
                 handleStartOfDay={setSODDatetime}
                 handleEndOfDay={setEODDatetime}
                 handleChangeDatetime={changeDatetime}
-                handleClearDatetime={clearDatetime}
+                handleClearDatetime={() => { }}
               />
             </div>
             <div className="text-center">
