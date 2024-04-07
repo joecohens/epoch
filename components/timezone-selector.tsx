@@ -17,7 +17,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-export default function TimezoneSelector({ timezones, currentTz, setCurrentTz }) {
+interface Props {
+  timezones: Array<string>,
+  currentTz: string,
+  setCurrentTz: Function
+}
+
+export default function TimezoneSelector({ timezones, currentTz, setCurrentTz }: Props) {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState(currentTz)
 
