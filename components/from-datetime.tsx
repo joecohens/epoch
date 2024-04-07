@@ -29,7 +29,7 @@ interface Props {
   handleChangeDatetime: Function,
 }
 
-export default function DateToEpoch({
+export default function FromDatetime({
   currentTz,
   datetime,
   handleChangeDatetime,
@@ -52,7 +52,11 @@ export default function DateToEpoch({
       return;
     }
 
-    handleChangeDatetime(selectedDatetime.set({ hours: date.getHours(), minutes: date.getMinutes(), seconds: date.getSeconds() }));
+    handleChangeDatetime(selectedDatetime.set({
+      hours: date.getHours(),
+      minutes: date.getMinutes(),
+      seconds: date.getSeconds()
+    }));
     setDate(selectedDatetime.toDate())
   }
 
@@ -96,7 +100,7 @@ export default function DateToEpoch({
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">
-            Convert to timestamp
+            Convert from Datetime
           </CardTitle>
         </CardHeader>
         <CardContent>
