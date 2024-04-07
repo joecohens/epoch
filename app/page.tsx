@@ -84,7 +84,7 @@ export default function Page() {
             <div className="card-content">
               <Live currentTz={currentTz} />
               <EpochToDate
-                tz={currentTz}
+                currentTz={currentTz}
                 timestamp={currentTimestamp}
                 format={currentFormat}
                 handleChangeTimestamp={changeTimestapAndFormat}
