@@ -1,12 +1,13 @@
-import React from 'react'
+import * as React from "react"
 import moment from 'moment-timezone'
-// import { Input, Icon } from 'antd';
+import { Input } from "@/components/ui/input"
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+
 import Table from '@/components/shared/table';
 
 export default class EpochToDate extends React.Component {
@@ -69,20 +70,16 @@ export default class EpochToDate extends React.Component {
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
               Convert to datetime
+              <Input
+                value={currentTimestamp ? currentTimestamp.format(format) : ''}
+                onChange={this.onChangeTimestamp}
+                ref={node => (this.timestampInput = node)}
+              />
             </CardTitle>
           </CardHeader>
           <CardContent>
             <Table dateTime={currentTimestamp} tz={tz} />
           </CardContent>
-          {/*
-        <Input
-          size="large"
-          suffix={suffix}
-          value={currentTimestamp ? currentTimestamp.format(format) : ''}
-          onChange={this.onChangeTimestamp}
-          ref={node => (this.timestampInput = node)}
-        />
-        */}
         </Card >
       </div>
     );

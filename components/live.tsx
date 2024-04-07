@@ -1,3 +1,4 @@
+"use client"
 import React, { Component } from "react"
 import moment from "moment"
 import {

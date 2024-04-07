@@ -1,13 +1,18 @@
-import React from 'react'
-// import { message, Button, Row, Col } from 'antd';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+"use client"
 
-const info = () => {
-  message.info('Copied to clipboard');
+import React from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Button } from "@/components/ui/button"
+import { useToast } from "@/components/ui/use-toast"
+
+const info = (toast: Function) => {
+  //toast({ title: 'Copied to clipboard' });
 };
 
-const Table = ({ dateTime, tz }) => (
-  <table className="table">
+const Table = ({ dateTime, tz }) => {
+  const { toast } = useToast()
+
+  return (<table className="table">
     <tbody>
       <tr>
         <td className="desktop">
@@ -18,8 +23,9 @@ const Table = ({ dateTime, tz }) => (
           {dateTime ? dateTime.format('X') : null}
         </td>
         <td align="right">
-          <CopyToClipboard text={dateTime ? dateTime.format('X') : null} onCopy={info}>
-            <button type="dashed" size="small">Copy</button>
+          <CopyToClipboard
+            text={dateTime ? dateTime.format('X') : null} onCopy={info(toast)}>
+            <Button variant="outline" size="sm">Copy</Button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -34,9 +40,9 @@ const Table = ({ dateTime, tz }) => (
         <td align="right">
           <CopyToClipboard
             text={dateTime ? dateTime.format('x') : null}
-            onCopy={info}
+            onCopy={info(toast)}
           >
-            <button type="dashed" size="small">Copy</button>
+            <Button variant="outline" size="sm">Copy</Button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -55,9 +61,9 @@ const Table = ({ dateTime, tz }) => (
             text={dateTime
               ? dateTime.format('MMMM Do YYYY, h:mm:ss a zZ')
               : null}
-            onCopy={info}
+            onCopy={info(toast)}
           >
-            <button type="dashed" size="small">Copy</button>
+            <Button variant="outline" size="sm">Copy</Button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -76,9 +82,9 @@ const Table = ({ dateTime, tz }) => (
             text={dateTime
               ? dateTime.clone().tz('utc').toISOString()
               : null}
-            onCopy={info}
+            onCopy={info(toast)}
           >
-            <button type="dashed" size="small">Copy</button>
+            <Button variant="outline" size="sm">Copy</Button>
           </CopyToClipboard>
         </td>
       </tr>
@@ -97,14 +103,14 @@ const Table = ({ dateTime, tz }) => (
             text={dateTime
               ? dateTime.clone().tz('utc').toDate().toUTCString()
               : null}
-            onCopy={info}
+            onCopy={info(toast)}
           >
-            <button type="dashed" size="small">Copy</button>
+            <Button variant="outline" size="sm">Copy</Button>
           </CopyToClipboard>
         </td>
       </tr>
     </tbody>
-  </table>
-);
+  </table>)
+};
 
 export default Table;

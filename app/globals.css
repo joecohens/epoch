@@ -74,3 +74,162 @@
       @apply bg-background text-foreground;
     }
   }
+        html,
+        body {
+          height: 100%;
+        }
+        body > div:first-of-type {
+          height: 100%;
+        }
+        body {
+          font-weight: 400;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
+          box-sizing: border-box;
+        }
+
+        h1 {
+          margin: 0;
+        }
+
+        .box-header {
+          text-transform: uppercase;
+          font-weight: bold;
+          font-kerning: 1.5;
+          font-size: 12px;
+        }
+
+        .container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex: 1 1 auto;
+          margin: 15px 0px;
+        }
+
+        .controls {
+          padding: 0px 12px;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .card {
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .card-header {
+          flex-shrink: 0;
+          height: 48px;
+          padding: 0px 10px;
+          margin-bottom: 15px;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .card-content {
+          padding: 15px;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          flex: 1 1 auto;
+        }
+
+        .text-center {
+          text-align: center;
+        }
+
+        .well {
+          border-radius: 4px;
+          border: 1px solid rgb(218, 225, 233);
+        }
+
+        .padding-sm {
+          padding: 5px;
+        }
+
+        .padding-md {
+          padding: 10px;
+        }
+
+        .padding-lg {
+          padding: 15px;
+        }
+
+        .margin-sm {
+          margin: 5px;
+        }
+
+        .margin-md {
+          margin: 10px;
+        }
+
+        .margin-lg {
+          margin: 15px;
+        }
+
+        .margin-top-sm {
+          margin-top: 5px;
+        }
+
+        .margin-top-md {
+          margin-top: 10px;
+        }
+
+        .margin-top-lg {
+          margin-top: 15px;
+        }
+
+        .margin-bottom-sm {
+          margin-bottom: 5px;
+        }
+
+        .margin-bottom-md {
+          margin-bottom: 10px;
+        }
+
+        .margin-bottom-lg {
+          margin-bottom: 15px;
+        }
+
+        .table {
+          border-collapse: collapse;
+          border-spacing: 0;
+          width: 100%;
+          display: table;
+        }
+
+        .table td, .table th {
+          padding: 8px 2px;
+          display: table-cell;
+          vertical-align: top;
+        }
+
+        .uppercase {
+          text-transform: uppercase;
+        }
+
+        .mobile {
+          display: block !important;
+        }
+
+        .desktop {
+          display: none !important;
+        }
+
+        @media only screen and (min-width: 640px) {
+          .card {
+            min-width: 640px;
+          }
+
+          .mobile {
+            display: none !important;
+          }
+
+          .desktop {
+            display: block !important;
+          }
+        }
