@@ -61,15 +61,6 @@ export default function Page() {
     setCurrentDatetime(moment(datetime).tz(currentTz))
   }
 
-  const setSODDatetime = () => {
-    setCurrentDatetime(currentDatetime.startOf('day'))
-  }
-
-  const setEODDatetime = () => {
-    setCurrentDatetime(currentDatetime.endOf('day'))
-  }
-
-
   const app = () => {
     return (
       <div>
@@ -88,15 +79,11 @@ export default function Page() {
                 timestamp={currentTimestamp}
                 format={currentFormat}
                 handleChangeTimestamp={changeTimestapAndFormat}
-                handleClearTimestamp={() => { }}
               />
               <DateToEpoch
-                tz={currentTz}
+                currentTz={currentTz}
                 datetime={currentDatetime}
-                handleStartOfDay={setSODDatetime}
-                handleEndOfDay={setEODDatetime}
                 handleChangeDatetime={changeDatetime}
-                handleClearDatetime={() => { }}
               />
             </div>
             <div className="text-center">
