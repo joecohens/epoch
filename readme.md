@@ -1,14 +1,14 @@
 # Epoch Converter
 
-![epoch](screenshot-v1.png)
+![https://epoch.vercel.app](screenshot-v2.jpg)
 
 ## Installation
 
-    $ npm install
+    $ pnpm install
 
 ## Running the app
 
-    $ npm run dev
+    $ pnpm dev
 
 ## Inspiration
 
