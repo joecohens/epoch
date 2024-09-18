@@ -28,7 +28,7 @@
     "lucide-react": "^0.365.0",
     "moment": "^2.22.0",
     "moment-timezone": "^0.5.14",
-    "next": "^14.1.4",
+    "next": "^14.2.10",
     "next-themes": "^0.3.0",
     "null-loader": "^3.0.0",
     "react": "^18.2.0",
