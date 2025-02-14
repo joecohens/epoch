@@ -29,7 +29,10 @@ import FromISO from '@/components/from-iso'
 
 export default function Page() {
   const currentDate: Date = new Date();
-  const timezones: Array<string> = moment.tz.names();
+  const timezones: Array<{ name: string, utc: string }> = moment.tz.names().map(tz => {
+    const utcOffset = moment.tz(tz).format('Z');
+    return { name: tz, utc: `UTC${utcOffset}` };
+  });
   const initCurrentTz: string = moment.tz.guess();
   const initCurrentTimestamp = moment(currentDate).tz(initCurrentTz);
   const initCurrentDatetime = moment(currentDate).tz(initCurrentTz);
