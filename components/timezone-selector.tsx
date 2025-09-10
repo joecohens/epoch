@@ -50,7 +50,7 @@ export default function TimezoneSelector({ timezones, currentTz, setCurrentTz }:
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-5">
+      <PopoverContent className="w-full">
         <Command
           filter={(value, search) => {
             if (value.toLowerCase().includes(search.toLowerCase())) {
