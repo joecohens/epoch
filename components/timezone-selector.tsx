@@ -66,9 +66,11 @@ export default function TimezoneSelector({ timezones, currentTz, setCurrentTz }:
               {timezones.map((timezone, index) => (
                 <CommandItem
                   key={index}
-                  value={timezone.utc + "%%" + timezone.name}
+                  value={`${timezone.utc} ${timezone.name}`}
                   onSelect={(currentValue) => {
-                    currentValue = currentValue.split("%%")[1]
+                    // currentValue is in the format of "(UTC+00:00) timezone/name"
+                    // we only want the timezone/name part
+                    currentValue = currentValue.split(" ")[1]
                     setValue(currentValue === value ? "" : currentValue)
                     setCurrentTz(currentValue === value ? "" : currentValue)
                     setOpen(false)
