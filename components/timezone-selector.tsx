@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/popover"
 
 interface Props {
-  timezones: Array<string>,
+  timezones: Array<{ name: string, utc: string }>,
   currentTz: string,
   setCurrentTz: Function
 }
@@ -41,13 +41,24 @@ export default function TimezoneSelector({ timezones, currentTz, setCurrentTz }:
           className="w-full justify-between"
         >
           {value
-            ? timezones.find((timezone) => timezone === value)
+            ? timezones.map((timezone) => {
+              if (timezone.name === value) {
+                return timezone.utc + " " + timezone.name;
+              }
+            } )
             : currentTz}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
-        <Command>
+      <PopoverContent className="w-full">
+        <Command
+          filter={(value, search) => {
+            if (value.toLowerCase().includes(search.toLowerCase())) {
+              return 1
+            }
+            return 0
+          }}
+        >
           <CommandInput placeholder="Search timezone..." />
           <CommandList>
             <CommandEmpty>No timezone found.</CommandEmpty>
@@ -55,8 +66,11 @@ export default function TimezoneSelector({ timezones, currentTz, setCurrentTz }:
               {timezones.map((timezone, index) => (
                 <CommandItem
                   key={index}
-                  value={timezone}
+                  value={`${timezone.utc} ${timezone.name}`}
                   onSelect={(currentValue) => {
+                    // currentValue is in the format of "(UTC+00:00) timezone/name"
+                    // we only want the timezone/name part
+                    currentValue = currentValue.split(" ")[1]
                     setValue(currentValue === value ? "" : currentValue)
                     setCurrentTz(currentValue === value ? "" : currentValue)
                     setOpen(false)
@@ -65,10 +79,10 @@ export default function TimezoneSelector({ timezones, currentTz, setCurrentTz }:
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === timezone ? "opacity-100" : "opacity-0"
+                      value === timezone.name ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {timezone}
+                  {`${timezone.utc} ${timezone.name}`}
                 </CommandItem>
               ))}
             </CommandGroup>
