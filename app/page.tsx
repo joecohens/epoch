@@ -1,6 +1,7 @@
 "use client"
 import * as React from "react"
-import moment from "moment-timezone"
+import { formatInTimeZone } from "date-fns-tz"
+import { fromUnixTime } from "date-fns"
 import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
 
@@ -29,19 +30,19 @@ import FromISO from '@/components/from-iso'
 
 export default function Page() {
   const currentDate: Date = new Date();
-  const timezones: Array<{ name: string, utc: string }> = moment.tz.names().map(tz => {
-    const utcOffset = moment.tz(tz).format('Z');
+  const timezones: Array<{ name: string, utc: string }> = Intl.supportedValuesOf('timeZone').map(tz => {
+    const utcOffset = formatInTimeZone(currentDate, tz, 'xxx');
     return { name: tz, utc: `UTC${utcOffset}` };
   });
-  const initCurrentTz: string = moment.tz.guess();
-  const initCurrentTimestamp = moment(currentDate).tz(initCurrentTz);
-  const initCurrentDatetime = moment(currentDate).tz(initCurrentTz);
-  const initCurrentISODatetime = moment(currentDate).tz(initCurrentTz);
+  const initCurrentTz: string = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const initCurrentTimestamp = new Date(currentDate);
+  const initCurrentDatetime = new Date(currentDate);
+  const initCurrentISODatetime = new Date(currentDate);
 
   // TODO: User router to get shareable values from querystring
-  // const currentTz = query.tz && zones.indexOf(query.tz) > 0 ? query.tz : moment.tz.guess();
-  // const currentTimestamp = query.timestamp ? moment.unix(query.timestamp).tz(currentTz) : moment(currentDate).tz(currentTz);
-  // const currentDatetime = query.datetime ? moment.unix(query.datetime).tz(currentTz) : moment(currentDate).tz(currentTz);
+  // const currentTz = query.tz && zones.indexOf(query.tz) > 0 ? query.tz : Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // const currentTimestamp = query.timestamp ? fromUnixTime(query.timestamp) : new Date(currentDate);
+  // const currentDatetime = query.datetime ? fromUnixTime(query.datetime) : new Date(currentDate);
 
   const { setTheme } = useTheme()
   const [currentTz, setCurrentTz] = React.useState(initCurrentTz)
@@ -55,25 +56,22 @@ export default function Page() {
   }, [])
 
   const reset = () => {
-    const newTimestamp = moment(currentDate).tz(currentTz);
-    const newDatetime = moment(currentDate).tz(currentTz);
-    const newISODatetime = moment(currentDate).tz(currentTz);
-
-    setCurrentTimestamp(newTimestamp)
-    setCurrentDatetime(newDatetime)
-    setCurrentDatetime(newISODatetime)
+    const now = new Date();
+    setCurrentTimestamp(new Date(now))
+    setCurrentDatetime(new Date(now))
+    setCurrentISODatetime(new Date(now))
   }
 
-  const changeTimestap = (timestamp: string) => {
-    setCurrentTimestamp(moment(timestamp).tz(currentTz))
+  const changeTimestap = (timestamp: Date) => {
+    setCurrentTimestamp(timestamp)
   }
 
-  const changeDatetime = (datetime: string) => {
-    setCurrentDatetime(moment(datetime).tz(currentTz))
+  const changeDatetime = (datetime: Date) => {
+    setCurrentDatetime(datetime)
   }
 
-  const changeISODatetime = (datetime: string) => {
-    setCurrentISODatetime(moment(datetime).tz(currentTz))
+  const changeISODatetime = (datetime: Date) => {
+    setCurrentISODatetime(datetime)
   }
 
   const app = () => {
@@ -167,5 +165,3 @@ export default function Page() {
     </div>
   );
 }
-
-

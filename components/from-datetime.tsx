@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import { format, startOfDay, endOfDay, set, setMilliseconds, isValid, isEqual } from "date-fns"
 import {
   Card,
   CardContent,
@@ -7,7 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -25,7 +24,7 @@ import Table from '@/components/shared/table'
 
 interface Props {
   currentTz: string,
-  datetime: moment.Moment,
+  datetime: Date,
   handleChangeDatetime: Function,
 }
 
@@ -34,65 +33,69 @@ export default function FromDatetime({
   datetime,
   handleChangeDatetime,
 }: Props) {
-  const [date, setDate] = React.useState<Date>(datetime.toDate());
+  const [date, setDate] = React.useState<Date>(new Date(datetime));
 
   const onChangeDate = (value: any) => {
-    const selectedDatetime = moment(value).tz(currentTz);
+    const selectedDatetime = new Date(value);
 
-    if (selectedDatetime && !selectedDatetime.isValid()) {
+    if (!isValid(selectedDatetime) || isNaN(selectedDatetime.getTime())) {
       return;
     }
 
     const currentDatetime =
       typeof datetime === 'string' || datetime instanceof String
-        ? moment(datetime).milliseconds(0).tz(currentTz)
+        ? setMilliseconds(new Date(datetime as unknown as string), 0)
         : datetime;
 
-    if (selectedDatetime && selectedDatetime.isSame(currentDatetime)) {
+    if (isEqual(selectedDatetime, currentDatetime)) {
       return;
     }
 
-    handleChangeDatetime(selectedDatetime.set({
+    const updatedDatetime = set(selectedDatetime, {
       hours: date.getHours(),
       minutes: date.getMinutes(),
       seconds: date.getSeconds()
-    }));
-    setDate(selectedDatetime.toDate())
+    });
+
+    handleChangeDatetime(updatedDatetime);
+    setDate(updatedDatetime)
   }
 
   const onChangeTime = (value: any) => {
-    const selectedDatetime = moment(value).tz(currentTz);
+    const selectedDatetime = new Date(value);
 
-    if (selectedDatetime && !selectedDatetime.isValid()) {
+    if (!isValid(selectedDatetime) || isNaN(selectedDatetime.getTime())) {
       return;
     }
 
     const currentDatetime =
       typeof datetime === 'string' || datetime instanceof String
-        ? moment(datetime).milliseconds(0).tz(currentTz)
+        ? setMilliseconds(new Date(datetime as unknown as string), 0)
         : datetime;
 
-    if (selectedDatetime && selectedDatetime.isSame(currentDatetime)) {
+    if (isEqual(selectedDatetime, currentDatetime)) {
       return;
     }
 
     handleChangeDatetime(selectedDatetime);
-    setDate(selectedDatetime.toDate())
+    setDate(selectedDatetime)
   }
 
   const setSODDatetime = () => {
-    handleChangeDatetime(datetime.startOf('day'))
-    setDate(datetime.toDate())
+    const sod = startOfDay(datetime);
+    handleChangeDatetime(sod)
+    setDate(sod)
   }
 
   const setEODDatetime = () => {
-    handleChangeDatetime(datetime.endOf('day'))
-    setDate(datetime.toDate())
+    const eod = endOfDay(datetime);
+    handleChangeDatetime(eod)
+    setDate(eod)
   }
 
   const currentDatetime =
     (typeof datetime === 'string' || datetime instanceof String)
-      ? moment(datetime).tz(currentTz)
+      ? new Date(datetime as unknown as string)
       : datetime;
 
   return (

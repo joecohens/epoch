@@ -1,5 +1,5 @@
 import * as React from "react"
-import moment from "moment-timezone"
+import { parseISO, isValid } from "date-fns"
 import { Input } from "@/components/ui/input"
 import {
   Card,
@@ -12,11 +12,9 @@ import Table from '@/components/shared/table';
 
 interface Props {
   currentTz: string,
-  timestamp: moment.Moment,
+  timestamp: Date,
   handleChangeTimestamp: Function,
 }
-
-const FORMAT = moment.ISO_8601
 
 export default function FromISO({
   currentTz,
@@ -25,7 +23,7 @@ export default function FromISO({
 }: Props) {
   const initTimestamp =
     typeof timestamp === 'string' || timestamp instanceof String
-      ? moment(timestamp).tz(currentTz)
+      ? new Date(timestamp as unknown as string)
       : timestamp
 
   const [inputValue, setInputValue] = React.useState(initTimestamp.toISOString())
@@ -35,16 +33,12 @@ export default function FromISO({
     const value = e.target.value.trim()
     setInputValue(value)
 
-    const selectedTimestamp = moment(value, FORMAT).tz(currentTz);
+    const selectedTimestamp = parseISO(value);
 
-    if (!selectedTimestamp.isValid()) {
+    if (!isValid(selectedTimestamp) || isNaN(selectedTimestamp.getTime())) {
       setErrValue('Invalid ISO Date')
       return;
     }
-
-    // if (selectedTimestamp.isSame(timestamp)) {
-    //   return;
-    // }
 
     handleChangeTimestamp(selectedTimestamp);
     setErrValue('')
