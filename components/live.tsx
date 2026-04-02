@@ -1,6 +1,7 @@
 "use client"
 import * as React from "react"
-import moment from "moment"
+import { getUnixTime, getTime } from "date-fns"
+import { formatInTimeZone } from "date-fns-tz"
 import {
   Card,
   CardContent,
@@ -13,11 +14,11 @@ interface Props {
 }
 
 export default function Live({ currentTz }: Props) {
-  const [timestamp, setTimestamp] = React.useState(moment().tz(currentTz))
+  const [timestamp, setTimestamp] = React.useState(new Date())
 
   const tick = React.useCallback(() => {
-    setTimestamp(moment().tz(currentTz))
-  }, [setTimestamp, currentTz]);
+    setTimestamp(new Date())
+  }, [setTimestamp]);
 
   React.useEffect(() => {
     const intervalId = setInterval(() => {
@@ -37,7 +38,7 @@ export default function Live({ currentTz }: Props) {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">
-            {timestamp ? timestamp.format('YYYY-MM-DD HH:mm:ss') : null}
+            {timestamp ? formatInTimeZone(timestamp, currentTz, 'yyyy-MM-dd HH:mm:ss') : null}
           </div>
         </CardContent>
       </Card>
@@ -50,7 +51,7 @@ export default function Live({ currentTz }: Props) {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {timestamp ? timestamp.format('X') : null}
+              {timestamp ? getUnixTime(timestamp) : null}
             </div>
           </CardContent>
         </Card>
@@ -62,7 +63,7 @@ export default function Live({ currentTz }: Props) {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {timestamp ? timestamp.format('x') : null}
+              {timestamp ? getTime(timestamp) : null}
             </div>
           </CardContent>
         </Card>
