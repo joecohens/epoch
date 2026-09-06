@@ -123,7 +123,7 @@ export default function FromDatetime({
                   mode="single"
                   selected={date}
                   onSelect={onChangeDate}
-                  initialFocus
+                  autoFocus
                 />
                 <div className="p-3 border-t border-border">
                   <TimePicker setDate={onChangeTime} date={date} />
