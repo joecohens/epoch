@@ -48,32 +48,34 @@ export default function Page() {
   const [currentTimestamp, setCurrentTimestamp] = React.useState(initCurrentTimestamp)
   const [currentDatetime, setCurrentDatetime] = React.useState(initCurrentDatetime)
   const [currentISODatetime, setCurrentISODatetime] = React.useState(initCurrentISODatetime)
-  const [isClient, setIsClient] = React.useState(false)
-
-  React.useEffect(() => {
-    setIsClient(true)
-  }, [])
+  // True once hydrated on the client; avoids SSR/client markup mismatch.
+  const isClient = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
 
   const reset = () => {
-    const newTimestamp = moment(currentDate).tz(currentTz);
-    const newDatetime = moment(currentDate).tz(currentTz);
-    const newISODatetime = moment(currentDate).tz(currentTz);
+    const now = new Date();
+    const newTimestamp = moment(now).tz(currentTz);
+    const newDatetime = moment(now).tz(currentTz);
+    const newISODatetime = moment(now).tz(currentTz);
 
     setCurrentTimestamp(newTimestamp)
     setCurrentDatetime(newDatetime)
-    setCurrentDatetime(newISODatetime)
+    setCurrentISODatetime(newISODatetime)
   }
 
-  const changeTimestap = (timestamp: string) => {
-    setCurrentTimestamp(moment(timestamp).tz(currentTz))
+  const changeTimestap = (timestamp: moment.Moment) => {
+    setCurrentTimestamp(timestamp.tz(currentTz))
   }
 
-  const changeDatetime = (datetime: string) => {
-    setCurrentDatetime(moment(datetime).tz(currentTz))
+  const changeDatetime = (datetime: moment.Moment) => {
+    setCurrentDatetime(datetime.tz(currentTz))
   }
 
-  const changeISODatetime = (datetime: string) => {
-    setCurrentISODatetime(moment(datetime).tz(currentTz))
+  const changeISODatetime = (datetime: moment.Moment) => {
+    setCurrentISODatetime(datetime.tz(currentTz))
   }
 
   const app = () => {

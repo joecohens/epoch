@@ -20,16 +20,12 @@ import {
 interface Props {
   timezones: Array<{ name: string, utc: string }>,
   currentTz: string,
-  setCurrentTz: Function
+  setCurrentTz: (tz: string) => void
 }
 
 export default function TimezoneSelector({ timezones, currentTz, setCurrentTz }: Props) {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState(currentTz)
-
-  React.useEffect(() => {
-    setValue(currentTz)
-  }, [currentTz])
+  const value = currentTz
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -71,7 +67,6 @@ export default function TimezoneSelector({ timezones, currentTz, setCurrentTz }:
                     // currentValue is in the format of "(UTC+00:00) timezone/name"
                     // we only want the timezone/name part
                     currentValue = currentValue.split(" ")[1]
-                    setValue(currentValue === value ? "" : currentValue)
                     setCurrentTz(currentValue === value ? "" : currentValue)
                     setOpen(false)
                   }}

@@ -13,7 +13,7 @@ import Table from '@/components/shared/table';
 interface Props {
   currentTz: string,
   timestamp: moment.Moment,
-  handleChangeTimestamp: Function,
+  handleChangeTimestamp: (timestamp: moment.Moment) => void,
 }
 
 const FORMAT = moment.ISO_8601
