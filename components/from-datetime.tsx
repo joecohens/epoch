@@ -26,7 +26,7 @@ import Table from '@/components/shared/table'
 interface Props {
   currentTz: string,
   datetime: moment.Moment,
-  handleChangeDatetime: Function,
+  handleChangeDatetime: (datetime: moment.Moment) => void,
 }
 
 export default function FromDatetime({
@@ -36,7 +36,8 @@ export default function FromDatetime({
 }: Props) {
   const [date, setDate] = React.useState<Date>(datetime.toDate());
 
-  const onChangeDate = (value: any) => {
+  const onChangeDate = (value: Date | undefined) => {
+    if (!value) return;
     const selectedDatetime = moment(value).tz(currentTz);
 
     if (selectedDatetime && !selectedDatetime.isValid()) {
@@ -60,7 +61,8 @@ export default function FromDatetime({
     setDate(selectedDatetime.toDate())
   }
 
-  const onChangeTime = (value: any) => {
+  const onChangeTime = (value: Date | undefined) => {
+    if (!value) return;
     const selectedDatetime = moment(value).tz(currentTz);
 
     if (selectedDatetime && !selectedDatetime.isValid()) {
