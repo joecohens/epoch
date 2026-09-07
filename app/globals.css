@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+  --font-sans: var(--app-font-sans), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   --color-background: hsl(var(--background));

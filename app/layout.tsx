@@ -30,7 +30,7 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           fontSans.className
         )}
-        style={{ ["--font-sans" as string]: fontSans.style.fontFamily }}
+        style={{ ["--app-font-sans" as string]: fontSans.style.fontFamily }}
       >
         <ThemeProvider
           attribute="class"

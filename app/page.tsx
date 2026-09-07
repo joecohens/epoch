@@ -56,9 +56,10 @@ export default function Page() {
   )
 
   const reset = () => {
-    const newTimestamp = moment(currentDate).tz(currentTz);
-    const newDatetime = moment(currentDate).tz(currentTz);
-    const newISODatetime = moment(currentDate).tz(currentTz);
+    const now = new Date();
+    const newTimestamp = moment(now).tz(currentTz);
+    const newDatetime = moment(now).tz(currentTz);
+    const newISODatetime = moment(now).tz(currentTz);
 
     setCurrentTimestamp(newTimestamp)
     setCurrentDatetime(newDatetime)
